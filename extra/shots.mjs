@@ -50,7 +50,14 @@ for (const p of pages) {
   const i = p.lastIndexOf(':');
   const path = p.slice(0, i);
   const name = p.slice(i + 1);
-  await nav(BASE + path);
+  // Cesta zakoncena `#bottom` znamena „pred odfotenim odroluj dole" — komentare
+  // a pole na novy komentar su az pod prehybom.
+  const bottom = path.endsWith('#bottom');
+  await nav(BASE + (bottom ? path.slice(0, -7) : path));
+  if (bottom) {
+    await ev(`window.scrollTo(0, document.body.scrollHeight); true`);
+    await sleep(900);
+  }
   const r = await send('Page.captureScreenshot', { format: 'png' });
   writeFileSync(`${OUT}/${name}.png`, Buffer.from(r.data, 'base64'));
   console.log(`  ${name}.png  ←  ${path}`);

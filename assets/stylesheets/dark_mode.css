@@ -778,3 +778,41 @@ html[data-dark="1"] #content .gantt_hdr.nwday {
 
 html[data-dark="1"] #content .gantt_subjects,
 html[data-dark="1"] #content .gantt_subjects_container { background-color: var(--dm-surface); }
+
+/* ------------------------------------------------------------------ *
+ * Hlavička komentára v histórii úlohy
+ * ------------------------------------------------------------------ *
+ *
+ * `h4.journal-header` má v jadre svetlé pozadie (`#f6f7f8`) a text v ňom je sivý
+ * (`#666`, `#555`, `#959595`). Na tmavej stránke z toho zostal biely pruh s takmer
+ * nečitateľným textom nad každým komentárom — pritom samotný text komentára pod ním
+ * tmavý bol.
+ */
+html[data-dark="1"] #content .journals h4.journal-header,
+html[data-dark="1"] .journals h4.journal-header {
+  background-color: var(--dm-surface-2);
+  color: var(--dm-text);
+  border-color: var(--dm-border);
+}
+
+html[data-dark="1"] .journals h4.journal-header a,
+html[data-dark="1"] .journals h4.journal-header .badge { color: var(--dm-text); }
+
+html[data-dark="1"] .journals h4.journal-header .update-info,
+html[data-dark="1"] .journals .journal-meta .journal-link,
+html[data-dark="1"] .journals .journal-details,
+html[data-dark="1"] ul.revision-info { color: var(--dm-text-muted); }
+
+html[data-dark="1"] .journals .journal-details a,
+html[data-dark="1"] ul.revision-info a { color: var(--dm-link); }
+html[data-dark="1"] .journals .journal-details a:hover,
+html[data-dark="1"] ul.revision-info a:hover { color: var(--dm-link-hover); }
+
+/* Komentár, na ktorý sa práve skočilo z odkazu (`div:target`) — v jadre svetlomodrý. */
+html[data-dark="1"] .journals div:target h4.journal-header {
+  background-color: #1e3550;
+  color: var(--dm-text);
+}
+
+/* Súkromná poznámka si musí udržať červený prúžok, len tlmenejší. */
+html[data-dark="1"] .journals .private-notes { border-left-color: #b34a4a; }

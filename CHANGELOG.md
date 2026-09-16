@@ -35,5 +35,9 @@ zostali „Členovia" v prehľade a všetky sekcie Môjho účtu biele), dátumo
 v Aktivite a riadky tabuliek, ktoré **nemajú triedy `odd`/`even`** (napríklad „Projekty"
 na stránke používateľa).
 
+Samostatnú zmienku si zaslúži **hlavička komentára** (`h4.journal-header`): jadro jej dáva
+svetlé pozadie a sivý text, takže nad každým komentárom zostal biely pruh s nečitateľným
+menom a dátumom — hoci text komentára pod ním tmavý bol.
+
 Testy: 10 kontrol v prehliadači (poradie ikony sa meria **súradnicami**, nie poradím
 v DOM; jasnosť pozadia musí klesnúť pod 60 z 255).
