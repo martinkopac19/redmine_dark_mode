@@ -644,3 +644,81 @@ html[data-dark="1"] div#sticky-issue-header {
 html[data-dark="1"] div#sticky-issue-header .subject,
 html[data-dark="1"] div#sticky-issue-header .issue-heading,
 html[data-dark="1"] div#sticky-issue-header a { color: var(--dm-text); }
+
+/* ------------------------------------------------------------------ *
+ * Prehľad, Aktivita, Môj účet, stránka používateľa
+ * ------------------------------------------------------------------ */
+
+/* Boxy. Téma ich kreslí natvrdo bielou cez `.box, #content .box` — teda selektorom
+   s id, ktorý prebije všetko slabšie. Bez tohto zostane „Členovia" v prehľade
+   a všetky sekcie v Mojom účte biele, s tmavými popiskami na bielom. */
+html[data-dark="1"] .box,
+html[data-dark="1"] #content .box,
+html[data-dark="1"] #content fieldset.box,
+html[data-dark="1"] #content div.box {
+  background-color: var(--dm-surface);
+  border-color: var(--dm-border);
+  color: var(--dm-text);
+}
+
+html[data-dark="1"] #content fieldset.box legend,
+html[data-dark="1"] #content .box h3,
+html[data-dark="1"] #content .box h4 { color: var(--dm-text); }
+
+/* Pruhované riadky tabuliek. Téma dáva nepárnym bielu; bez prekrytia s rovnakou váhou
+   zostane na stránke používateľa biely riadok so sivým textom. */
+html[data-dark="1"] #content tr.odd,
+html[data-dark="1"] #content table tr.odd { background-color: var(--dm-surface); }
+html[data-dark="1"] #content tr.even,
+html[data-dark="1"] #content table tr.even { background-color: var(--dm-surface-2); }
+
+/* Aktivita — dátumové hlavičky sú v jadre svetlý pás cez celú šírku. */
+html[data-dark="1"] div#activity h3,
+html[data-dark="1"] #search-results h3 {
+  background-color: var(--dm-surface-2);
+  color: var(--dm-text);
+  border-color: var(--dm-border);
+}
+
+html[data-dark="1"] div#activity dt .time,
+html[data-dark="1"] div#activity dd span.description,
+html[data-dark="1"] #search-results dd span.description { color: var(--dm-text-muted); }
+
+html[data-dark="1"] div#activity dt.me .time { border-bottom-color: var(--dm-text-muted); }
+
+/* Bočný panel má vlastné polia (dátum v aktivite, filtre) — tie nie sú v `#content`. */
+html[data-dark="1"] #sidebar input,
+html[data-dark="1"] #sidebar select,
+html[data-dark="1"] #sidebar textarea {
+  background-color: var(--dm-surface-2);
+  color: var(--dm-text);
+  border-color: var(--dm-border);
+}
+
+html[data-dark="1"] #sidebar input[type="submit"],
+html[data-dark="1"] #sidebar button { background-color: var(--dm-surface-3); }
+
+/* Stránka používateľa — meno a avatar sedia v hlavičke obsahu. */
+html[data-dark="1"] #content h2,
+html[data-dark="1"] .user h2,
+html[data-dark="1"] #content .icon-user { color: var(--dm-text); }
+
+/* Tabuľky, ktorých riadky NEMAJÚ triedy `odd`/`even` — napríklad „Projekty" a „Úlohy"
+   na stránke používateľa (`<tr class="project child leaf public">`). Pruhovanie tam
+   rieši niečo iné než naše pravidlá vyššie, takže riadok zostal biely aj s tmavým
+   zvyškom stránky. */
+html[data-dark="1"] #content table.list tbody tr,
+html[data-dark="1"] #content table.list tbody tr.project,
+html[data-dark="1"] #content table.list tbody tr td {
+  background-color: var(--dm-surface);
+  color: var(--dm-text);
+}
+
+html[data-dark="1"] #content table.list tbody tr.even,
+html[data-dark="1"] #content table.list tbody tr.even td { background-color: var(--dm-surface-2); }
+
+html[data-dark="1"] #content table.list tbody tr:hover,
+html[data-dark="1"] #content table.list tbody tr:hover td { background-color: var(--dm-surface-3); }
+
+html[data-dark="1"] #content table.list thead th,
+html[data-dark="1"] #content table.list th { background-color: var(--dm-surface-2); color: var(--dm-text); }

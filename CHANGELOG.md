@@ -28,5 +28,12 @@ pozadie, takže bez toho vyzeral detail úlohy ako panda. To isté platí pre pa
 notifikácií, command palette, okná AI asistenta, emoji picker a prilepený pruh s názvom
 úlohy pri rolovaní.
 
+Prezreté a doladené obrazovky: **detail úlohy, zoznam úloh, zoznam projektov, Prehľad
+projektu, Aktivita, Moja stránka, Môj účet a stránka používateľa.** Najviac práce dali tri
+miesta, ktoré si téma alebo jadro kreslia natvrdo bielou: boxy (`#content .box` — bez toho
+zostali „Členovia" v prehľade a všetky sekcie Môjho účtu biele), dátumové hlavičky
+v Aktivite a riadky tabuliek, ktoré **nemajú triedy `odd`/`even`** (napríklad „Projekty"
+na stránke používateľa).
+
 Testy: 10 kontrol v prehliadači (poradie ikony sa meria **súradnicami**, nie poradím
 v DOM; jasnosť pozadia musí klesnúť pod 60 z 255).
