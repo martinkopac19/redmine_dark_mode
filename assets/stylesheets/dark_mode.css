@@ -1,0 +1,557 @@
+/* Tmavý režim pre Previo Redmine.
+ *
+ * PREČO JE TENTO SÚBOR TAKÝ DLHÝ: jadro Redmine 6.1 nemá farby v premenných. V 85 kB
+ * jeho CSS je 440 natvrdo zapísaných farieb a nikde ani `prefers-color-scheme`. Tmavý
+ * režim sa preto nedá zapnúť prehodením pár tokenov — musí sa prekryť to, čo jadro
+ * a téma nakreslili. Premenné nižšie sú NAŠE, zavedené až tu.
+ *
+ * Všetko tmavé je pod `html[data-dark="1"]`, takže v svetlom režime tento súbor nemá
+ * žiadny účinok okrem samotnej ikony prepínača. Pluginové CSS sa načítava po téme,
+ * takže na prebitie stačí bežná špecificita — `!important` sa používa len tam, kde ho
+ * má aj jadro alebo téma.
+ */
+
+/* ------------------------------------------------------------------ *
+ * Ikona mesiaca v hlavičke (platí v oboch režimoch)
+ * ------------------------------------------------------------------ */
+
+/* Text položky zostáva v DOM pre čítačky obrazovky, len ho vizuálne schováme.
+   `font-size: 0` a nie `overflow: hidden` — tým druhým si téma raz odrezala odznak
+   s počtom pri zvončeku. */
+#top-menu #account .dark-mode,
+#top-menu .dark-mode {
+  position: relative;
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  font-size: 0;
+  vertical-align: middle;
+}
+
+/* Ikona sa kreslí MASKOU, nie obrázkom s natvrdo zapísanou farbou.
+   Dôvod: každá naša téma má hlavičku inak — v `previo-grey` je svetlá a ikony sú sivé,
+   inde je tmavá a ikony biele. Maska plnená `currentColor` si farbu vezme z odkazu,
+   takže prepínač vyzerá správne v každej téme a plugin od žiadnej nezávisí. */
+#top-menu #account .dark-mode::before,
+#top-menu .dark-mode::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: currentColor;
+  -webkit-mask: no-repeat center / 17px 17px
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z'/%3E%3C/svg%3E");
+  mask: no-repeat center / 17px 17px
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z'/%3E%3C/svg%3E");
+  opacity: 0.85;
+}
+
+#top-menu #account .dark-mode:hover::before,
+#top-menu .dark-mode:hover::before { opacity: 1; }
+
+/* Poradie v hlavičke: lievik (filter mailov) → mesiac → odhlásenie.
+   Určuje sa tu a pre všetky tri položky naraz, lebo poradie v DOM je iné než to, čo
+   má človek vidieť, a téma si ho prehadzuje cez `order`. Pluginové CSS sa načítava
+   po téme, takže tieto hodnoty platia. */
+#top-menu #account li:has(.notification-filter) { order: 2; }
+#top-menu #account li:has(.dark-mode) { order: 3; }
+#top-menu #account li:has(.logout) { order: 4; }
+
+/* V tmavom režime je tam slnko — ikona ukazuje, čo klik spraví, nie v akom stave si. */
+html[data-dark="1"] #top-menu #account .dark-mode::before,
+html[data-dark="1"] #top-menu .dark-mode::before {
+  background-color: #FFD479;
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='5'/%3E%3Cpath d='M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='5'/%3E%3Cpath d='M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42'/%3E%3C/svg%3E");
+  opacity: 1;
+}
+
+/* ------------------------------------------------------------------ *
+ * Paleta
+ * ------------------------------------------------------------------ */
+
+html[data-dark="1"] {
+  --dm-bg: #16181c;          /* plocha stránky */
+  --dm-surface: #1d2025;     /* boxy, tabuľky, panely */
+  --dm-surface-2: #23272e;   /* hlavičky tabuliek, hover, pruhované riadky */
+  --dm-surface-3: #2b3038;   /* vyvýšené plochy (menu, tooltip, kód) */
+  --dm-border: #363c45;
+  --dm-border-soft: #2a2f37;
+  --dm-text: #dee3ea;
+  --dm-text-muted: #9aa3ae;
+  --dm-text-dim: #7b838e;
+  --dm-link: #7fb3f5;
+  --dm-link-hover: #a8ccff;
+  --dm-positive: #5EBA67;
+  --dm-warning: #E8913C;
+  --dm-negative: #E86A6A;
+  --dm-info: #64B5D9;
+  /* Brandová farba zostáva, len stlmená — hlavička má aj v tme patriť Previu. */
+  --dm-brand-bar: #221a2b;
+  --dm-selection: rgba(127, 179, 245, 0.25);
+  color-scheme: dark;
+}
+
+/* Zosúladí natívne prvky prehliadača (scrollbary, dátumové polia, autofill). */
+html[data-dark="1"] body { background: var(--dm-bg); color: var(--dm-text); }
+
+/* ------------------------------------------------------------------ *
+ * Základné plochy
+ * ------------------------------------------------------------------ */
+
+html[data-dark="1"] #wrapper,
+html[data-dark="1"] #main,
+html[data-dark="1"] #content,
+html[data-dark="1"] #footer {
+  background: var(--dm-bg);
+  color: var(--dm-text);
+}
+
+html[data-dark="1"] #content { border-color: var(--dm-border); }
+
+html[data-dark="1"] #sidebar {
+  background: var(--dm-surface);
+  color: var(--dm-text-muted);
+  border-color: var(--dm-border);
+}
+
+html[data-dark="1"] #sidebar h3,
+html[data-dark="1"] #content h1,
+html[data-dark="1"] #content h2,
+html[data-dark="1"] #content h3,
+html[data-dark="1"] #content h4,
+html[data-dark="1"] h2, html[data-dark="1"] h3, html[data-dark="1"] h4 {
+  color: var(--dm-text);
+}
+
+html[data-dark="1"] #footer { border-color: var(--dm-border); color: var(--dm-text-dim); }
+
+/* Hlavička si drží brand, len stmavne. Téma ju maľuje vlastnou farbou, preto
+   prebíjame jej premenné a nie jednotlivé pravidlá. */
+html[data-dark="1"] {
+  --previo-primary: var(--dm-brand-bar);
+  --previo-primary-dark: #171120;
+}
+
+html[data-dark="1"] #top-menu { background: var(--dm-brand-bar); }
+
+/* ------------------------------------------------------------------ *
+ * Odkazy
+ * ------------------------------------------------------------------ */
+
+html[data-dark="1"] a,
+html[data-dark="1"] a:link,
+html[data-dark="1"] a:visited { color: var(--dm-link); }
+
+html[data-dark="1"] a:hover { color: var(--dm-link-hover); }
+
+html[data-dark="1"] #header a,
+html[data-dark="1"] #top-menu a,
+html[data-dark="1"] #main-menu li a { color: #fff; }
+
+html[data-dark="1"] a.issue.closed,
+html[data-dark="1"] .issue.closed a { color: var(--dm-text-dim); }
+
+/* ------------------------------------------------------------------ *
+ * Tabuľky
+ * ------------------------------------------------------------------ */
+
+html[data-dark="1"] table.list,
+html[data-dark="1"] table.list td,
+html[data-dark="1"] table.list th {
+  background: transparent;
+  color: var(--dm-text);
+  border-color: var(--dm-border);
+}
+
+html[data-dark="1"] table.list thead th,
+html[data-dark="1"] table.list tr.group,
+html[data-dark="1"] table.list th {
+  background: var(--dm-surface-2);
+  color: var(--dm-text);
+  border-color: var(--dm-border);
+}
+
+html[data-dark="1"] table.list tbody tr { background: var(--dm-surface); }
+html[data-dark="1"] table.list tbody tr.odd,
+html[data-dark="1"] tr.odd { background: var(--dm-surface); }
+html[data-dark="1"] table.list tbody tr.even,
+html[data-dark="1"] tr.even { background: var(--dm-surface-2); }
+
+html[data-dark="1"] table.list tbody tr:hover,
+html[data-dark="1"] table.list tbody tr.context-menu-selection {
+  background: var(--dm-surface-3);
+}
+
+html[data-dark="1"] table.list tbody tr.context-menu-selection td { color: var(--dm-text); }
+
+/* ------------------------------------------------------------------ *
+ * Boxy, fieldsety, panely
+ * ------------------------------------------------------------------ */
+
+html[data-dark="1"] .box,
+html[data-dark="1"] div.box,
+html[data-dark="1"] fieldset.box,
+html[data-dark="1"] .splitcontentleft .box,
+html[data-dark="1"] .splitcontentright .box {
+  background: var(--dm-surface);
+  border-color: var(--dm-border);
+  color: var(--dm-text);
+}
+
+html[data-dark="1"] fieldset { border-color: var(--dm-border); }
+html[data-dark="1"] legend { color: var(--dm-text-muted); }
+
+html[data-dark="1"] .nodata,
+html[data-dark="1"] p.nodata {
+  background: var(--dm-surface-2);
+  border-color: var(--dm-border);
+  color: var(--dm-text-muted);
+}
+
+/* ------------------------------------------------------------------ *
+ * Formuláre
+ * ------------------------------------------------------------------ */
+
+html[data-dark="1"] input[type="text"],
+html[data-dark="1"] input[type="password"],
+html[data-dark="1"] input[type="email"],
+html[data-dark="1"] input[type="number"],
+html[data-dark="1"] input[type="search"],
+html[data-dark="1"] input[type="date"],
+html[data-dark="1"] textarea,
+html[data-dark="1"] select {
+  background: var(--dm-surface-2);
+  color: var(--dm-text);
+  border-color: var(--dm-border);
+}
+
+html[data-dark="1"] input::placeholder,
+html[data-dark="1"] textarea::placeholder { color: var(--dm-text-dim); }
+
+html[data-dark="1"] input:focus,
+html[data-dark="1"] textarea:focus,
+html[data-dark="1"] select:focus {
+  background: var(--dm-surface-3);
+  border-color: var(--dm-link);
+  outline-color: var(--dm-link);
+}
+
+html[data-dark="1"] input[type="submit"],
+html[data-dark="1"] input[type="button"],
+html[data-dark="1"] button:not(.rte-btn),
+html[data-dark="1"] .buttons input {
+  background: var(--dm-surface-3);
+  color: var(--dm-text);
+  border-color: var(--dm-border);
+}
+
+html[data-dark="1"] input[type="submit"]:hover,
+html[data-dark="1"] button:not(.rte-btn):hover { background: #333944; }
+
+html[data-dark="1"] label,
+html[data-dark="1"] .tabular p label { color: var(--dm-text-muted); }
+
+/* ------------------------------------------------------------------ *
+ * Záložky a kontextové menu
+ * ------------------------------------------------------------------ */
+
+html[data-dark="1"] #content .tabs ul li a,
+html[data-dark="1"] .tabs ul li a {
+  background: var(--dm-surface-2);
+  color: var(--dm-text-muted);
+  border-color: var(--dm-border);
+}
+
+html[data-dark="1"] .tabs ul li a.selected {
+  background: var(--dm-surface);
+  color: var(--dm-text);
+  border-bottom-color: var(--dm-surface);
+}
+
+html[data-dark="1"] #context-menu .menu-root,
+html[data-dark="1"] .drdn-content,
+html[data-dark="1"] ul.menu-children {
+  background: var(--dm-surface-3);
+  border-color: var(--dm-border);
+  color: var(--dm-text);
+}
+
+html[data-dark="1"] #context-menu a,
+html[data-dark="1"] .drdn-content a { color: var(--dm-text); }
+
+html[data-dark="1"] #context-menu a:hover,
+html[data-dark="1"] .drdn-content a:hover { background: var(--dm-link); color: #10141a; }
+
+/* ------------------------------------------------------------------ *
+ * Detail úlohy, komentáre, wiki
+ * ------------------------------------------------------------------ */
+
+html[data-dark="1"] div.issue,
+html[data-dark="1"] .issue.details,
+html[data-dark="1"] #issue_tree,
+html[data-dark="1"] .journal,
+html[data-dark="1"] div.journal {
+  background: var(--dm-surface);
+  border-color: var(--dm-border);
+  color: var(--dm-text);
+}
+
+html[data-dark="1"] .journal .details,
+html[data-dark="1"] .journal-link,
+html[data-dark="1"] .author,
+html[data-dark="1"] .description em { color: var(--dm-text-muted); }
+
+html[data-dark="1"] .wiki pre,
+html[data-dark="1"] pre, html[data-dark="1"] code {
+  background: var(--dm-surface-3);
+  color: #e6e1dc;
+  border-color: var(--dm-border);
+}
+
+html[data-dark="1"] .wiki blockquote {
+  background: var(--dm-surface-2);
+  border-left-color: var(--dm-border);
+  color: var(--dm-text-muted);
+}
+
+html[data-dark="1"] .wiki table td,
+html[data-dark="1"] .wiki table th { border-color: var(--dm-border); }
+
+html[data-dark="1"] hr { border-color: var(--dm-border); background: var(--dm-border); }
+
+/* ------------------------------------------------------------------ *
+ * Hlášky
+ * ------------------------------------------------------------------ */
+
+html[data-dark="1"] div.flash.notice,
+html[data-dark="1"] .conflict { background: #16301b; border-color: #2c5a34; color: #c9e6cd; }
+html[data-dark="1"] div.flash.error,
+html[data-dark="1"] #errorExplanation { background: #351a1a; border-color: #6b2f2f; color: #f0cccc; }
+html[data-dark="1"] div.flash.warning { background: #352a16; border-color: #6b532c; color: #f0e0c6; }
+html[data-dark="1"] div.flash.info { background: #16262f; border-color: #2c4c5c; color: #cfe4ee; }
+
+/* ------------------------------------------------------------------ *
+ * Ikony (SVG v jadre kreslí `stroke`, nie `fill`)
+ * ------------------------------------------------------------------ */
+
+html[data-dark="1"] svg.icon-svg { stroke: var(--dm-text-muted); }
+html[data-dark="1"] a:hover svg.icon-svg { stroke: var(--dm-text); }
+html[data-dark="1"] #sidebar a.selected svg.icon-svg { stroke: var(--dm-text) !important; }
+
+/* Legacy PNG ikony jadra sú kreslené tmavou farbou na svetlom podklade — na tmavom
+   by zanikli. Zosvetlia sa filtrom; týka sa len ikon, nie príloh a avatarov. */
+html[data-dark="1"] .icon > img,
+html[data-dark="1"] img.icon { filter: invert(0.85) hue-rotate(180deg); }
+
+/* ------------------------------------------------------------------ *
+ * Naše pluginy
+ * ------------------------------------------------------------------ */
+
+/* Panel notifikácií */
+html[data-dark="1"] #rin-panel,
+html[data-dark="1"] .rin-panel {
+  background: var(--dm-surface-3);
+  border-color: var(--dm-border);
+  color: var(--dm-text);
+}
+html[data-dark="1"] .rin-item { border-color: var(--dm-border-soft); }
+html[data-dark="1"] .rin-item:hover { background: var(--dm-surface-2); }
+html[data-dark="1"] .rin-snippet, html[data-dark="1"] .rin-meta { color: var(--dm-text-muted); }
+
+/* Command palette */
+html[data-dark="1"] #rcp-overlay .rcp-box,
+html[data-dark="1"] .rcp-box {
+  background: var(--dm-surface-3);
+  color: var(--dm-text);
+  border-color: var(--dm-border);
+}
+html[data-dark="1"] .rcp-item { color: var(--dm-text); }
+html[data-dark="1"] .rcp-item.rcp-active { background: var(--dm-surface-2); }
+html[data-dark="1"] .rcp-input { background: var(--dm-surface-2); color: var(--dm-text); }
+
+/* AI asistent */
+html[data-dark="1"] .raa-window,
+html[data-dark="1"] .raa-panel {
+  background: var(--dm-surface-3);
+  color: var(--dm-text);
+  border-color: var(--dm-border);
+}
+html[data-dark="1"] .raa-langselect { background: var(--dm-surface-2); color: var(--dm-text); }
+
+/* Rich editor */
+html[data-dark="1"] .rte-editor,
+html[data-dark="1"] .rte-toolbar,
+html[data-dark="1"] .rte-menu {
+  background: var(--dm-surface-2);
+  color: var(--dm-text);
+  border-color: var(--dm-border);
+}
+html[data-dark="1"] .rte-btn { color: var(--dm-text); }
+html[data-dark="1"] .rte-btn:hover { background: var(--dm-surface-3); }
+
+/* Emoji picker */
+html[data-dark="1"] .rep-picker {
+  background: var(--dm-surface-3);
+  color: var(--dm-text);
+  border-color: var(--dm-border);
+}
+
+/* ------------------------------------------------------------------ *
+ * Drobnosti
+ * ------------------------------------------------------------------ */
+
+html[data-dark="1"] ::selection { background: var(--dm-selection); }
+
+html[data-dark="1"] .ui-widget-content,
+html[data-dark="1"] .ui-autocomplete,
+html[data-dark="1"] .ui-datepicker {
+  background: var(--dm-surface-3);
+  color: var(--dm-text);
+  border-color: var(--dm-border);
+}
+
+html[data-dark="1"] .ui-menu .ui-menu-item-wrapper.ui-state-active,
+html[data-dark="1"] .ui-state-hover { background: var(--dm-link); color: #10141a; border-color: var(--dm-link); }
+
+html[data-dark="1"] .tooltip span.tip {
+  background: var(--dm-surface-3);
+  color: var(--dm-text);
+  border-color: var(--dm-border);
+}
+
+html[data-dark="1"] .pagination,
+html[data-dark="1"] .pagination a { color: var(--dm-text-muted); }
+
+html[data-dark="1"] .badge,
+html[data-dark="1"] .tag-label-color { filter: brightness(0.85); }
+
+/* Prílohy a avatary sa NEPREFARBUJÚ — screenshot v úlohe musí zostať taký, aký je. */
+html[data-dark="1"] .attachments img,
+html[data-dark="1"] img.gravatar,
+html[data-dark="1"] .wiki img { filter: none; }
+
+/* ------------------------------------------------------------------ *
+ * Prekrytia s vyššou váhou
+ * ------------------------------------------------------------------ *
+ *
+ * Téma kreslí polia, selecty a záložky cez `#content …`. To je selektor s id, takže
+ * prebije čokoľvek, čo má len triedy — vrátane `html[data-dark="1"] input`. Preto sa
+ * tieto pravidlá píšu s rovnakým `#content`, nie s `!important`: váha musí byť rovnaká
+ * alebo vyššia, a keďže pluginové CSS sa načítava po téme, rovnaká stačí.
+ */
+
+html[data-dark="1"] #content input[type="text"],
+html[data-dark="1"] #content input[type="password"],
+html[data-dark="1"] #content input[type="email"],
+html[data-dark="1"] #content input[type="number"],
+html[data-dark="1"] #content input[type="search"],
+html[data-dark="1"] #content input[type="date"],
+html[data-dark="1"] #content textarea,
+html[data-dark="1"] #content select,
+html[data-dark="1"] #content select:not([multiple]),
+html[data-dark="1"] #content select[multiple] {
+  background-color: var(--dm-surface-2);
+  color: var(--dm-text);
+  border-color: var(--dm-border);
+}
+
+html[data-dark="1"] #content input:focus,
+html[data-dark="1"] #content textarea:focus,
+html[data-dark="1"] #content select:focus {
+  background-color: var(--dm-surface-3);
+  border-color: var(--dm-link);
+}
+
+/* Vyhľadávanie a prepínač projektu sedia v hlavičke, nie v `#content`. */
+html[data-dark="1"] #quick-search input,
+html[data-dark="1"] #header input,
+html[data-dark="1"] .drdn-trigger,
+html[data-dark="1"] #project-jump .drdn-trigger {
+  background-color: var(--dm-surface-2);
+  color: var(--dm-text);
+  border-color: var(--dm-border);
+}
+
+/* Záložky projektu — najnápadnejší svetlý pás, ak sa neprekryjú. */
+html[data-dark="1"] #content .tabs,
+html[data-dark="1"] #content .tabs ul,
+html[data-dark="1"] .tabs {
+  background: transparent;
+  border-color: var(--dm-border);
+}
+
+html[data-dark="1"] #content .tabs ul li a,
+html[data-dark="1"] #main-menu li a {
+  background-color: var(--dm-surface-2);
+  color: var(--dm-text-muted);
+  border-color: var(--dm-border);
+}
+
+html[data-dark="1"] #content .tabs ul li a:hover,
+html[data-dark="1"] #main-menu li a:hover {
+  background-color: var(--dm-surface-3);
+  color: var(--dm-text);
+}
+
+html[data-dark="1"] #content .tabs ul li a.selected,
+html[data-dark="1"] #main-menu li a.selected,
+html[data-dark="1"] #main-menu li a.selected:hover {
+  background-color: var(--dm-surface);
+  color: var(--dm-text);
+}
+
+/* Tlačidlá v obsahu (Upraviť, Sledovať, AI zhrnutie…). */
+html[data-dark="1"] #content input[type="submit"],
+html[data-dark="1"] #content input[type="button"],
+html[data-dark="1"] #content button,
+html[data-dark="1"] #content .contextual a.icon {
+  background-color: var(--dm-surface-2);
+  color: var(--dm-text);
+  border-color: var(--dm-border);
+}
+
+html[data-dark="1"] #content input[type="submit"]:hover,
+html[data-dark="1"] #content button:hover,
+html[data-dark="1"] #content .contextual a.icon:hover {
+  background-color: var(--dm-surface-3);
+}
+
+/* Ukazovateľ „% hotovo" — svetlý pásik na tmavom pozadí inak svieti. */
+html[data-dark="1"] table.progress,
+html[data-dark="1"] .progress-info,
+html[data-dark="1"] td.todo { background-color: var(--dm-surface-3); }
+html[data-dark="1"] td.closed { background-color: var(--dm-text-dim); }
+html[data-dark="1"] td.done { background-color: var(--dm-positive); }
+
+/* ------------------------------------------------------------------ *
+ * Prehodenie sivej škály témy
+ * ------------------------------------------------------------------ *
+ *
+ * Toto je najúčinnejšie miesto celého súboru. Všetky tri naše témy stavajú plochy,
+ * orámovania a text na spoločnej škále `--previo-grey50..600` (a `previo-grey` má
+ * navyše `--p3-*` pre hlavičku a polia). Otočením tej škály stmavne naraz to, čo by
+ * sa inak muselo prekrývať po jednom pravidle.
+ *
+ * Preto to nie je hack: téma tie premenné zaviedla práve na to, aby sa farba dala
+ * meniť na jednom mieste. Robíme presne to, len opačným smerom.
+ */
+html[data-dark="1"] {
+  --previo-black: var(--dm-text);
+  --previo-grey50: var(--dm-surface);
+  --previo-grey100: var(--dm-surface-2);
+  --previo-grey200: var(--dm-surface-3);
+  --previo-grey300: var(--dm-border);
+  --previo-grey400: #6d7681;
+  --previo-grey500: var(--dm-text-muted);
+  --previo-grey600: #c3cad2;
+
+  /* previo-grey: hlavička, horný pruh, polia */
+  --p3-header-bg: var(--dm-surface);
+  --p3-topbar-bg: var(--dm-bg);
+  --p3-text: var(--dm-text);
+  --p3-text-muted: var(--dm-text-muted);
+  --p3-border: var(--dm-border);
+  --p3-line: var(--dm-border-soft);
+  --p3-field-bg: var(--dm-surface-2);
+}

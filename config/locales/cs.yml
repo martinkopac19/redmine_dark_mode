@@ -1,0 +1,9 @@
+cs:
+  dark_mode:
+    toggle_label: "Tmavý režim"
+    switch_to_dark: "Přepnout na tmavý režim"
+    switch_to_light: "Přepnout na světlý režim"
+    legend_general: "Tmavý režim"
+    note: "Přepínač v hlavičce (ikona měsíce). Volba se ukládá k účtu, takže platí na každém počítači, kde je člověk přihlášený."
+    setting_enabled: "Zapnout tmavý režim"
+    setting_enabled_info: "Vypnutím zmizí přepínač z hlavičky. Nastavení jednotlivých lidí zůstane uložené."

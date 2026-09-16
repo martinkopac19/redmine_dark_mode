@@ -1,0 +1,9 @@
+en:
+  dark_mode:
+    toggle_label: "Dark mode"
+    switch_to_dark: "Switch to dark mode"
+    switch_to_light: "Switch to light mode"
+    legend_general: "Dark mode"
+    note: "A switch in the header (moon icon). The choice is stored on the account, so it follows the person to any computer they sign in from."
+    setting_enabled: "Enable dark mode"
+    setting_enabled_info: "Turning this off removes the switch from the header. Individual choices stay saved."

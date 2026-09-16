@@ -1,0 +1,16 @@
+<div class="box tabular settings">
+  <fieldset class="box">
+    <legend><%= l(:'dark_mode.legend_general') %></legend>
+    <p class="rdm-hint"><%= l(:'dark_mode.note') %></p>
+
+    <p>
+      <label><%= l(:'dark_mode.setting_enabled') %></label>
+      <%# Efektívna hodnota, nie `settings[...]` — kľúč, ktorý v DB ešte nie je, by sa
+          ukázal ako vypnutý a prvé uloženie nastavení by funkciu naozaj vyplo.
+          Presne to sa stalo v ai_assistant 0.6.4. %>
+      <%= hidden_field_tag 'settings[enabled]', '0', :id => nil %>
+      <%= check_box_tag 'settings[enabled]', '1', DarkMode.enabled? %>
+      <em class="info"><%= l(:'dark_mode.setting_enabled_info') %></em>
+    </p>
+  </fieldset>
+</div>
