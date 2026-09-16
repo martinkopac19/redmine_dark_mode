@@ -346,56 +346,132 @@ html[data-dark="1"] img.icon { filter: invert(0.85) hue-rotate(180deg); }
 
 /* ------------------------------------------------------------------ *
  * Naše pluginy
- * ------------------------------------------------------------------ */
+ * ------------------------------------------------------------------ *
+ *
+ * Tieto plochy nekreslí ani jadro, ani téma — každý plugin si nesie vlastné biele
+ * pozadie. Bez nich vyzerá detail úlohy ako panda: tmavá stránka a v nej biely obdĺžnik
+ * popisu a komentárov.
+ */
+
+/* Rich editor — popis úlohy, jej názov a komentáre.
+   `.re-editor` je samotná plocha, do ktorej sa píše; zvyšok sú vyskakovacie okná. */
+html[data-dark="1"] .re-editor,
+html[data-dark="1"] .re-editor .ProseMirror {
+  background: var(--dm-surface);
+  color: var(--dm-text);
+  border-color: var(--dm-border);
+}
+
+html[data-dark="1"] .re-editor .ProseMirror p,
+html[data-dark="1"] .re-editor .ProseMirror li,
+html[data-dark="1"] .re-editor .ProseMirror h1,
+html[data-dark="1"] .re-editor .ProseMirror h2,
+html[data-dark="1"] .re-editor .ProseMirror h3 { color: var(--dm-text); }
+
+html[data-dark="1"] .re-editor .ProseMirror blockquote {
+  background: var(--dm-surface-2);
+  border-left-color: var(--dm-border);
+  color: var(--dm-text-muted);
+}
+
+html[data-dark="1"] .re-editor .ProseMirror pre,
+html[data-dark="1"] .re-editor .ProseMirror code {
+  background: var(--dm-surface-3);
+  color: #e6e1dc;
+}
+
+html[data-dark="1"] .re-editor .ProseMirror table td,
+html[data-dark="1"] .re-editor .ProseMirror table th { border-color: var(--dm-border); }
+
+html[data-dark="1"] .re-bubble-menu,
+html[data-dark="1"] .re-link-dialog,
+html[data-dark="1"] .re-slash {
+  background: var(--dm-surface-3);
+  color: var(--dm-text);
+  border-color: var(--dm-border);
+}
+
+html[data-dark="1"] .re-bubble-menu-item,
+html[data-dark="1"] .re-slash-item { color: var(--dm-text); }
+html[data-dark="1"] .re-bubble-menu-item:hover,
+html[data-dark="1"] .re-slash-item:hover,
+html[data-dark="1"] .re-slash-item.re-active { background: var(--dm-surface-2); }
+
+html[data-dark="1"] .re-link-btn {
+  background: var(--dm-surface-2);
+  color: var(--dm-text);
+  border-color: var(--dm-border);
+}
+
+html[data-dark="1"] .re-link-hint,
+html[data-dark="1"] .re-save-ind { color: var(--dm-text-muted); }
+
+html[data-dark="1"] .re-comment-box { border-top-color: var(--dm-border); }
+
+/* Názov úlohy sa upravuje na mieste — pri prejdení myšou a pri písaní si podfarbuje
+   pozadie, čo by v tme svietilo. */
+html[data-dark="1"] .subject h3.re-title-edit:hover { background: var(--dm-surface-2); }
+html[data-dark="1"] .subject h3.re-title-edit:focus { background: var(--dm-surface-3); color: var(--dm-text); }
+
+/* Vykreslený (needitovaný) popis a komentáre v histórii. */
+html[data-dark="1"] .wiki,
+html[data-dark="1"] .journal .wiki,
+html[data-dark="1"] #issue_description_wiki,
+html[data-dark="1"] .description .wiki { color: var(--dm-text); }
 
 /* Panel notifikácií */
-html[data-dark="1"] #rin-panel,
-html[data-dark="1"] .rin-panel {
+html[data-dark="1"] #rin-panel {
   background: var(--dm-surface-3);
   border-color: var(--dm-border);
   color: var(--dm-text);
 }
 html[data-dark="1"] .rin-item { border-color: var(--dm-border-soft); }
 html[data-dark="1"] .rin-item:hover { background: var(--dm-surface-2); }
-html[data-dark="1"] .rin-snippet, html[data-dark="1"] .rin-meta { color: var(--dm-text-muted); }
+html[data-dark="1"] .rin-snippet,
+html[data-dark="1"] .rin-meta,
+html[data-dark="1"] .rin-head,
+html[data-dark="1"] .rin-foot { color: var(--dm-text-muted); }
 
 /* Command palette */
-html[data-dark="1"] #rcp-overlay .rcp-box,
-html[data-dark="1"] .rcp-box {
+html[data-dark="1"] #rcp-box {
   background: var(--dm-surface-3);
   color: var(--dm-text);
   border-color: var(--dm-border);
 }
 html[data-dark="1"] .rcp-item { color: var(--dm-text); }
 html[data-dark="1"] .rcp-item.rcp-active { background: var(--dm-surface-2); }
-html[data-dark="1"] .rcp-input { background: var(--dm-surface-2); color: var(--dm-text); }
+html[data-dark="1"] .rcp-sub,
+html[data-dark="1"] .rcp-group,
+html[data-dark="1"] .rcp-empty { color: var(--dm-text-muted); }
 
 /* AI asistent */
-html[data-dark="1"] .raa-window,
-html[data-dark="1"] .raa-panel {
+html[data-dark="1"] #raa-box,
+html[data-dark="1"] #raa-pl-box,
+html[data-dark="1"] .raa-pl-card {
   background: var(--dm-surface-3);
   color: var(--dm-text);
   border-color: var(--dm-border);
 }
-html[data-dark="1"] .raa-langselect { background: var(--dm-surface-2); color: var(--dm-text); }
-
-/* Rich editor */
-html[data-dark="1"] .rte-editor,
-html[data-dark="1"] .rte-toolbar,
-html[data-dark="1"] .rte-menu {
+html[data-dark="1"] button.ai-assistant-btn,
+html[data-dark="1"] .raa-langselect {
   background: var(--dm-surface-2);
   color: var(--dm-text);
   border-color: var(--dm-border);
 }
-html[data-dark="1"] .rte-btn { color: var(--dm-text); }
-html[data-dark="1"] .rte-btn:hover { background: var(--dm-surface-3); }
+html[data-dark="1"] .ai-assistant-hint,
+html[data-dark="1"] .ai-assistant-status,
+html[data-dark="1"] .raa-dm-status { color: var(--dm-text-muted); }
 
 /* Emoji picker */
-html[data-dark="1"] .rep-picker {
+html[data-dark="1"] .rep-pop,
+html[data-dark="1"] .rep-ac {
   background: var(--dm-surface-3);
   color: var(--dm-text);
   border-color: var(--dm-border);
 }
+html[data-dark="1"] .rep-btn { color: var(--dm-text); }
+html[data-dark="1"] .rep-ac-row:hover,
+html[data-dark="1"] .rep-ac-row.rep-ac-sel { background: var(--dm-surface-2); }
 
 /* ------------------------------------------------------------------ *
  * Drobnosti
@@ -555,3 +631,16 @@ html[data-dark="1"] {
   --p3-line: var(--dm-border-soft);
   --p3-field-bg: var(--dm-surface-2);
 }
+
+/* Prilepený pruh s názvom úlohy (`#sticky-issue-header`) — jadro ho kreslí bielym
+   pozadím a pri rolovaní ostane visieť nad tmavým obsahom ako svetlý pás. */
+html[data-dark="1"] div#sticky-issue-header {
+  background: var(--dm-surface-2);
+  color: var(--dm-text);
+  border-color: var(--dm-border);
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
+}
+
+html[data-dark="1"] div#sticky-issue-header .subject,
+html[data-dark="1"] div#sticky-issue-header .issue-heading,
+html[data-dark="1"] div#sticky-issue-header a { color: var(--dm-text); }

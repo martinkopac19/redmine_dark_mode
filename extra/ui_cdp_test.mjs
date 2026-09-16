@@ -122,6 +122,14 @@ console.log('  jasnost pozadia (0-255):', lum);
 check('pozadie je tmave (< 60)', lum !== null && lum < 60, true);
 await shot('darkmode-tmavy');
 
+// Spodok stranky — komentare a pole na novy komentar. Popis aj komentare kresli rich
+// editor, ktory si nesie vlastne biele pozadie; bez prekrytia vyzera detail ulohy ako
+// panda: tmava stranka a v nej biele obdlzniky.
+await ev(`window.scrollTo(0, document.body.scrollHeight); true`);
+await sleep(900);
+await shot('darkmode-komentare');
+await ev(`window.scrollTo(0, 0); true`);
+
 // --- trvanlivost ------------------------------------------------------------
 console.log('\n[3] Volba sa uklada k uctu');
 await nav(`${BASE}/issues/${ISSUE}`);

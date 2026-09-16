@@ -22,5 +22,11 @@ farby v premenných (85 kB CSS, **440 natvrdo zapísaných farieb**, nikde
 stoja naše témy (`--previo-grey50..600`, `--p3-*`) — tým stmavne naraz to, čo by sa inak
 prekrývalo po jednom pravidle.
 
+Tmavý je aj **popis úlohy a komentáre**, vrátane plochy rich editora, jeho vyskakovacej
+lišty, palety pod `/` a okna na vkladanie odkazu — každý plugin si nesie vlastné biele
+pozadie, takže bez toho vyzeral detail úlohy ako panda. To isté platí pre panel
+notifikácií, command palette, okná AI asistenta, emoji picker a prilepený pruh s názvom
+úlohy pri rolovaní.
+
 Testy: 10 kontrol v prehliadači (poradie ikony sa meria **súradnicami**, nie poradím
 v DOM; jasnosť pozadia musí klesnúť pod 60 z 255).
