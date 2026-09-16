@@ -722,3 +722,59 @@ html[data-dark="1"] #content table.list tbody tr:hover td { background-color: va
 
 html[data-dark="1"] #content table.list thead th,
 html[data-dark="1"] #content table.list th { background-color: var(--dm-surface-2); color: var(--dm-text); }
+
+/* ------------------------------------------------------------------ *
+ * Kalendár a Ganttov graf
+ * ------------------------------------------------------------------ *
+ *
+ * Kalendár aj Gantt sú v jadre postavené na natvrdo zapísaných svetlých odtieňoch
+ * (#fff, #f6f7f8, #f1f1f1, #ffd) — sú to samostatné mriežky, ktorých sa nedotkne nič
+ * z toho, čo stmaví bežné tabuľky.
+ */
+
+/* --- Kalendár --- */
+html[data-dark="1"] #content .cal .calhead,
+html[data-dark="1"] #content .cal .week-number {
+  background-color: var(--dm-surface-2);
+  color: var(--dm-text);
+  border-color: var(--dm-border);
+}
+
+html[data-dark="1"] #content .cal .calbody,
+html[data-dark="1"] #content .cal .calbody.this-month {
+  background-color: var(--dm-surface);
+  color: var(--dm-text);
+  border-color: var(--dm-border);
+}
+
+/* Dni mimo zobrazeného mesiaca a víkendy — v svetlom režime jemne sivé, tu jemne tmavšie. */
+html[data-dark="1"] #content .cal .calbody.other-month { background-color: var(--dm-bg); }
+html[data-dark="1"] #content .cal .calbody.other-month p.day-num { color: var(--dm-text-dim); }
+html[data-dark="1"] #content .cal .calbody.nwday:not(.other-month) { background-color: var(--dm-surface-2); }
+
+/* Dnešok si musí zostať všimnuteľný — v jadre je svetložltý, tu tlmená teplá plocha. */
+html[data-dark="1"] #content .cal .calbody.today { background-color: #3a3520; }
+html[data-dark="1"] #content .cal .calbody.today p.day-num { color: #FFD479; }
+
+html[data-dark="1"] #content .cal .calbody p.day-num { color: var(--dm-text-muted); }
+html[data-dark="1"] #content ul.cal { border-color: var(--dm-border); }
+
+/* --- Ganttov graf --- */
+html[data-dark="1"] #content table.gantt-table,
+html[data-dark="1"] #content table.gantt-table td { border-color: var(--dm-border); }
+
+html[data-dark="1"] #content .gantt_hdr,
+html[data-dark="1"] #content #gantt_area .gantt_hdr,
+html[data-dark="1"] #content .gantt_subjects_container .gantt_hdr {
+  background-color: var(--dm-surface-2);
+  color: var(--dm-text);
+  border-color: var(--dm-border);
+}
+
+html[data-dark="1"] #content .gantt_hdr.nwday {
+  background-color: var(--dm-surface-3);
+  color: var(--dm-text-dim);
+}
+
+html[data-dark="1"] #content .gantt_subjects,
+html[data-dark="1"] #content .gantt_subjects_container { background-color: var(--dm-surface); }
