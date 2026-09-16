@@ -816,3 +816,68 @@ html[data-dark="1"] .journals div:target h4.journal-header {
 
 /* Súkromná poznámka si musí udržať červený prúžok, len tlmenejší. */
 html[data-dark="1"] .journals .private-notes { border-left-color: #b34a4a; }
+
+/* ------------------------------------------------------------------ *
+ * Zakladanie úlohy a rozbaľovacie „+" menu
+ * ------------------------------------------------------------------ */
+
+/* Ponuka pod „+" v hlavičke projektu (Nová úloha, Nová kategória, …). Jadro ju kreslí
+   bielou cez `#main-menu .menu-children`, teda selektorom s id — bez rovnakej váhy
+   zostane biela aj na tmavej stránke. */
+html[data-dark="1"] #main-menu .menu-children,
+html[data-dark="1"] #main-menu ul.menu-children {
+  background-color: var(--dm-surface-3);
+  border-color: var(--dm-border);
+}
+
+html[data-dark="1"] #main-menu .menu-children li a {
+  background-color: var(--dm-surface-3);
+  color: var(--dm-text);
+}
+
+html[data-dark="1"] #main-menu .menu-children li a:hover {
+  background-color: var(--dm-link);
+  color: #10141a;
+}
+
+/* Tlačidlo na výber súborov. Téma mu dáva vzhľad sekundárneho tlačidla — teda bielu. */
+html[data-dark="1"] #content input[type="file"]::file-selector-button {
+  background-color: var(--dm-surface-3);
+  color: var(--dm-text);
+  border-color: var(--dm-border);
+}
+
+html[data-dark="1"] #content input[type="file"] { color: var(--dm-text-muted); }
+
+/* Pole „Tags" je Select2 (z gemu `redmineup`, nie z pluginu) — vlastný widget
+   s vlastnou bielou. Sem patrí aj jeho rozbalený zoznam a našepkávač. */
+html[data-dark="1"] .select2-container--default .select2-selection--single,
+html[data-dark="1"] .select2-container--default .select2-selection--multiple,
+html[data-dark="1"] .select2-dropdown,
+html[data-dark="1"] .select2-container .select2-search--inline .select2-search__field,
+html[data-dark="1"] .select2-search--dropdown .select2-search__field {
+  background-color: var(--dm-surface-2);
+  color: var(--dm-text);
+  border-color: var(--dm-border);
+}
+
+html[data-dark="1"] .select2-container--default .select2-selection--single .select2-selection__rendered,
+html[data-dark="1"] .select2-results__option { color: var(--dm-text); }
+
+html[data-dark="1"] .select2-container--default .select2-selection--single .select2-selection__placeholder,
+html[data-dark="1"] .select2-container--default .select2-selection--multiple .select2-selection__placeholder {
+  color: var(--dm-text-dim);
+}
+
+html[data-dark="1"] .select2-container--default .select2-results__option--highlighted[aria-selected],
+html[data-dark="1"] .select2-results__option--highlighted {
+  background-color: var(--dm-link);
+  color: #10141a;
+}
+
+/* Už pridané štítky sú farebné odznaky — nechávame im farbu, len rámik zladíme. */
+html[data-dark="1"] .select2-container--default .select2-selection--multiple .select2-selection__choice {
+  background-color: var(--dm-surface-3);
+  border-color: var(--dm-border);
+  color: var(--dm-text);
+}

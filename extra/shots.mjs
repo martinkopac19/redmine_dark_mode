@@ -53,10 +53,18 @@ for (const p of pages) {
   // Cesta zakoncena `#bottom` znamena „pred odfotenim odroluj dole" — komentare
   // a pole na novy komentar su az pod prehybom.
   const bottom = path.endsWith('#bottom');
-  await nav(BASE + (bottom ? path.slice(0, -7) : path));
+  // `#plus` rozbali ponuku pod „+" v hlavicke projektu — inak sa ukaze az pri
+  // prejdeni mysou a na snimke by nebola.
+  const plus = path.endsWith('#plus');
+  const clean = bottom ? path.slice(0, -7) : (plus ? path.slice(0, -5) : path);
+  await nav(BASE + clean);
   if (bottom) {
     await ev(`window.scrollTo(0, document.body.scrollHeight); true`);
     await sleep(900);
+  }
+  if (plus) {
+    await ev(`(function(){ var u = document.querySelector('#main-menu ul.menu-children'); if (u) u.classList.add('visible'); return !!u; })()`);
+    await sleep(400);
   }
   const r = await send('Page.captureScreenshot', { format: 'png' });
   writeFileSync(`${OUT}/${name}.png`, Buffer.from(r.data, 'base64'));
