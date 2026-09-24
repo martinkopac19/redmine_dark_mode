@@ -56,7 +56,15 @@ for (const p of pages) {
   // `#plus` rozbali ponuku pod „+" v hlavicke projektu — inak sa ukaze az pri
   // prejdeni mysou a na snimke by nebola.
   const plus = path.endsWith('#plus');
-  const clean = bottom ? path.slice(0, -7) : (plus ? path.slice(0, -5) : path);
+  // `#flyout` odfotí stránku v šírke mobilu s otvoreným bočným menu. Šírka sa musí
+  // nastaviť PRED načítaním — jadro presúva menu do vysúvacieho panela pri štarte.
+  const flyout = path.endsWith('#flyout');
+  // `#drag` nasimuluje ťahanie bloku na My page (jadro vtedy pridá triedu `dragging`),
+  // aby sa dalo overiť, že miesta na pustenie sú pri ťahaní stále vidieť.
+  const drag = path.endsWith('#drag');
+  const suffix = [bottom && '#bottom', plus && '#plus', flyout && '#flyout', drag && '#drag'].find(Boolean);
+  const clean = suffix ? path.slice(0, -suffix.length) : path;
+  if (flyout) await send('Emulation.setDeviceMetricsOverride', { width: 400, height: 860, deviceScaleFactor: 1, mobile: true });
   await nav(BASE + clean);
   if (bottom) {
     await ev(`window.scrollTo(0, document.body.scrollHeight); true`);
@@ -66,7 +74,16 @@ for (const p of pages) {
     await ev(`(function(){ var u = document.querySelector('#main-menu ul.menu-children'); if (u) u.classList.add('visible'); return !!u; })()`);
     await sleep(400);
   }
+  if (flyout) {
+    await ev(`(function(){ var b = document.querySelector('.js-flyout-menu-toggle-button'); if (b) b.click(); else document.documentElement.classList.add('flyout-is-active'); return true; })()`);
+    await sleep(700);
+  }
+  if (drag) {
+    await ev(`document.body.classList.add('dragging'); true`);
+    await sleep(300);
+  }
   const r = await send('Page.captureScreenshot', { format: 'png' });
+  if (flyout) await send('Emulation.setDeviceMetricsOverride', { width: 1500, height: 1000, deviceScaleFactor: 1, mobile: false });
   writeFileSync(`${OUT}/${name}.png`, Buffer.from(r.data, 'base64'));
   console.log(`  ${name}.png  ←  ${path}`);
 }

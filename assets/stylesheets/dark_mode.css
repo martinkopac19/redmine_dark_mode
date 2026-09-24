@@ -881,3 +881,38 @@ html[data-dark="1"] .select2-container--default .select2-selection--multiple .se
   border-color: var(--dm-border);
   color: var(--dm-text);
 }
+
+/* ---------------------------------------------------------------------------
+ * Vysúvacie menu na mobile (.flyout-menu)
+ *
+ * Téma mu dáva pozadie z NAJTMAVŠIEHO konca sivej škály (--previo-grey600), lebo
+ * v svetlom režime je to tmavé menu s bielym textom. Tmavý režim ale celú škálu
+ * otáča, takže z najtmavšieho odtieňa sa stane svetlosivý #c3cad2 — a menu, ktoré
+ * bolo tmavé už predtým, sa zosvetlí. Pozadie preto nastavujeme natvrdo.
+ *
+ * Text odkazov vraciame na svetlý: jadro ho má biely (.flyout-menu a), ale naše
+ * všeobecné pravidlo pre odkazy ho prebije modrou.
+ * ------------------------------------------------------------------------- */
+html[data-dark="1"] .flyout-menu { background-color: var(--dm-surface-3); }
+
+html[data-dark="1"] .flyout-menu a,
+html[data-dark="1"] .flyout-menu ul li a { color: var(--dm-text); }
+
+html[data-dark="1"] .flyout-menu ul li a:hover { background-color: var(--dm-surface-2); }
+
+html[data-dark="1"] .flyout-menu .icon svg,
+html[data-dark="1"] .flyout-menu .icon-only svg { stroke: var(--dm-text); }
+
+/* ---------------------------------------------------------------------------
+ * My page — miesta na pustenie bloku (.block-receiver)
+ *
+ * Jadro im kreslí prerušovaný rámček BIELOU farbou. Na bielom pozadí je
+ * neviditeľný a šedý (#777) sa stáva až počas ťahania bloku — preto ho v svetlom
+ * režime nikto nevidí. Na tmavom pozadí by biely rámček svietil stále.
+ * ------------------------------------------------------------------------- */
+html[data-dark="1"] .block-receiver { border-color: transparent; }
+
+/* Samotné bloky majú v jadre svetlosivý rámček (#d0d7de) — na tmavom pozadí z neho
+ * je takmer biela čiara, tvrdšia než rámčeky všetkých ostatných boxov. */
+html[data-dark="1"] .mypage-box { border-color: var(--dm-border); }
+html[data-dark="1"] .dragging .block-receiver { border-color: var(--dm-text-dim); }

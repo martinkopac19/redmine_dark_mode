@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.1.1 - 2026-09-24
+
+- **Vysúvacie menu na mobile bolo svetlé a nečitateľné.** Téma mu dáva pozadie
+  z najtmavšieho konca sivej škály, lebo v svetlom režime je to tmavé menu s bielym
+  textom. Tmavý režim celú škálu otáča — a menu, ktoré bolo tmavé už predtým, tým
+  zosvetlel na svetlosivé so svetlomodrými odkazmi. Pozadie je teraz natvrdo tmavé
+  a text svetlý.
+- **My page ukazovala prerušované rámčeky okolo blokov.** Jadro ich kreslí bielou,
+  takže na bielom pozadí nie sú vidieť a šedé sú len počas ťahania bloku. Na tmavom
+  pozadí svietili stále. Teraz sú neviditeľné a pri ťahaní sa ukážu ako doteraz.
+- Rámček samotných blokov na My page bol takmer biely (jadro `#d0d7de`) — zjednotený
+  s rámčekmi ostatných boxov.
+- Fotoaparát `extra/shots.mjs` vie `#flyout` (šírka mobilu s otvoreným menu)
+  a `#drag` (My page počas ťahania bloku).
+
 ## 0.1.0 - 2026-09-16
 
 Prvá verzia — prepínač tmavého režimu v hlavičke.
