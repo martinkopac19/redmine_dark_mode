@@ -451,6 +451,12 @@ html[data-dark="1"] .rcp-item.rcp-active { background: var(--dm-surface-2); }
 html[data-dark="1"] .rcp-sub,
 html[data-dark="1"] .rcp-group,
 html[data-dark="1"] .rcp-empty { color: var(--dm-text-muted); }
+/* Paleta má vpisovaný text a názvy výsledkov natvrdo takmer čierne (a pre pole cez id,
+ * takže naše všeobecné pravidlo pre inputy prehrá). Vybraný riadok je v jadre palety
+ * tmavočervený — v tme svetlejšou červenou. */
+html[data-dark="1"] #rcp-input { color: var(--dm-text); border-bottom-color: var(--dm-border); }
+html[data-dark="1"] .rcp-label { color: var(--dm-text); }
+html[data-dark="1"] .rcp-item.rcp-active .rcp-label { color: var(--dm-negative); }
 
 /* AI asistent */
 html[data-dark="1"] #raa-box,

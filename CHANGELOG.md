@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.3 - 2026-09-25
+
+- **Text v command palete (Ctrl+K) bol v tme takmer čierny** — vpisovaný text aj názvy
+  výsledkov. Teraz sú svetlé, vybraný riadok svetlejšou červenou.
+
 ## 0.1.2 - 2026-09-25
 
 - **Zoznam úloh v tme nerozlišoval priority.** Podfarbenie riadkov podľa priority
