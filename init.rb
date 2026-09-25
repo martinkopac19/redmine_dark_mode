@@ -16,7 +16,7 @@ Redmine::Plugin.register :redmine_dark_mode do
   author 'Martin Kopáč'
   description 'A moon switch in the header that turns Redmine dark for the logged-in ' \
               'user. The choice is stored on the account, not in the browser.'
-  version '0.1.3'
+  version '0.1.4'
   url 'https://github.com/martinkopac19/redmine_dark_mode'
   requires_redmine version_or_higher: '6.0'
 

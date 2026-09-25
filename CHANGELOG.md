@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.4 - 2026-09-25
+
+- **Rozbalené selecty (filtre, formuláre) boli biele s bielym textom.** Téma kreslí
+  zoznam sama s natvrdo bielym pozadím. Teraz je tmavý, zvolená položka modrá; platí to
+  aj pre zoznamy stĺpcov v Options.
+
 ## 0.1.3 - 2026-09-25
 
 - **Text v command palete (Ctrl+K) bol v tme takmer čierny** — vpisovaný text aj názvy

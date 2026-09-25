@@ -553,6 +553,25 @@ html[data-dark="1"] #content select:focus {
   border-color: var(--dm-link);
 }
 
+/* Rozbalený zoznam selectu. Téma ho v Chromiu kreslí sama (`appearance: base-select`)
+ * s natvrdo bielym `::picker(select)`, položky ale dedia náš svetlý text — výsledok bol
+ * biely text na bielom. Zvolená položka mala brandovú farbu na svetloružovom podklade;
+ * rovnaké pravidlo `#content option:checked` platí aj pre viacnásobné selecty (stĺpce
+ * v Options), preto je prefarbené pre všetky.
+ * `::picker(select)` je vo vlastnom pravidle: prehliadač, ktorý ho nepozná, zahodí celé
+ * pravidlo, a nesmel by s ním zahodiť aj farby položiek. */
+html[data-dark="1"] ::picker(select) {
+  background: var(--dm-surface-3);
+  border-color: var(--dm-border);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
+}
+html[data-dark="1"] #content option { color: var(--dm-text); border-bottom-color: var(--dm-border-soft); }
+html[data-dark="1"] #content option:hover,
+html[data-dark="1"] #content option:focus { background: var(--dm-surface-2); }
+html[data-dark="1"] #content option:checked { background: rgba(127, 179, 245, 0.18); color: var(--dm-link); }
+html[data-dark="1"] #content option:checked:empty { background: transparent; }
+html[data-dark="1"] #content optgroup { color: var(--dm-text-muted); }
+
 /* Vyhľadávanie a prepínač projektu sedia v hlavičke, nie v `#content`. */
 html[data-dark="1"] #quick-search input,
 html[data-dark="1"] #header input,
