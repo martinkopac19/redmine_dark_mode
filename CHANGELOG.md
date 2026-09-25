@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.2 - 2026-09-25
+
+- **Zoznam úloh v tme nerozlišoval priority.** Podfarbenie riadkov podľa priority
+  z témy prebili tmavé bunky, takže High, Urgent aj Immediate vyzerali ako Normal.
+  Teraz majú tmavé odtiene v rovnakom poradí ako vo svetlom režime.
+
 ## 0.1.1 - 2026-09-24
 
 - **Vysúvacie menu na mobile bolo svetlé a nečitateľné.** Téma mu dáva pozadie

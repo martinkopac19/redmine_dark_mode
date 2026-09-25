@@ -916,3 +916,12 @@ html[data-dark="1"] .block-receiver { border-color: transparent; }
  * je takmer biela čiara, tvrdšia než rámčeky všetkých ostatných boxov. */
 html[data-dark="1"] .mypage-box { border-color: var(--dm-border); }
 html[data-dark="1"] .dragging .block-receiver { border-color: var(--dm-text-dim); }
+
+/* Farby priorít v zozname úloh. Téma ich dáva riadku (`tr`), ale naše pravidlá vyššie
+ * farbia každú bunku (`#content table.list tbody tr td`), takže podfarbenie v tme úplne
+ * zmizlo. Rovnaké poradie ako v svetlom režime: High oranžová, Urgent medzi, Immediate
+ * červená. Označený riadok (pravý klik) si necháva farbu výberu. */
+html[data-dark="1"] #content table.list tbody tr.priority-high3:not(.context-menu-selection) td,
+html[data-dark="1"] #content table.list tbody tr.priority-high4:not(.context-menu-selection) td { background-color: #3a2b1f; }
+html[data-dark="1"] #content table.list tbody tr.priority-high2:not(.context-menu-selection) td { background-color: #4a2b20; }
+html[data-dark="1"] #content table.list tbody tr.priority-highest:not(.context-menu-selection) td { background-color: #4d2328; }
