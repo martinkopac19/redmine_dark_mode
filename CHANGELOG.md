@@ -5,6 +5,8 @@
 - **Zoznam úloh v tme nerozlišoval priority.** Podfarbenie riadkov podľa priority
   z témy prebili tmavé bunky, takže High, Urgent aj Immediate vyzerali ako Normal.
   Teraz majú tmavé odtiene v rovnakom poradí ako vo svetlom režime.
+- **Nadpisy v paneli notifikácií boli takmer čierne.** Neprečítané sú teraz biele
+  a tučné, prečítané svetlosivé; bodka pri neprečítaných je výraznejšia.
 
 ## 0.1.1 - 2026-09-24
 

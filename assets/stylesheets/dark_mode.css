@@ -431,6 +431,14 @@ html[data-dark="1"] .rin-snippet,
 html[data-dark="1"] .rin-meta,
 html[data-dark="1"] .rin-head,
 html[data-dark="1"] .rin-foot { color: var(--dm-text-muted); }
+/* Nadpis riadku a panelu berie `--previo-grey700`, ktorý téma nedefinuje, takže padal
+ * na záložnú takmer čiernu a v tme sa nedal čítať. Neprečítané sú biele a tučné,
+ * prečítané o stupeň tmavšie, aby neprečítané vynikli. Bodka mala brandovú fialovú (v tme stlmenú
+ * takmer do pozadia) — teraz farbou odkazov. */
+html[data-dark="1"] .rin-head-title { color: var(--dm-text); }
+html[data-dark="1"] .rin-title { color: #c3cad2; }
+html[data-dark="1"] .rin-unread .rin-title { color: #fff; }
+html[data-dark="1"] .rin-unread .rin-dot { background: var(--dm-link); }
 
 /* Command palette */
 html[data-dark="1"] #rcp-box {
