@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.5 - 2026-10-02
+
+- **V okne AI issue creatora bol zadaný text v tme nečitateľný** (a popisok „What needs
+  to be done?" tiež). Pluginy používajú `--previo-grey700` ako najtmavší text, téma ho
+  nedefinuje a tmavý režim ho neprepínal — padal na záložnú takmer čiernu. Teraz je
+  v palete tmavého režimu, takže sa opravili naraz aj nadpisy a tučný text v AI zhrnutí.
+
 ## 0.1.4 - 2026-09-25
 
 - **Rozbalené selecty (filtre, formuláre) boli biele s bielym textom.** Téma kreslí

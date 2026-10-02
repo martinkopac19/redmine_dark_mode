@@ -654,6 +654,9 @@ html[data-dark="1"] {
   --previo-grey400: #6d7681;
   --previo-grey500: var(--dm-text-muted);
   --previo-grey600: #c3cad2;
+  /* Témy grey700 nedefinujú, ale naše pluginy ho používajú ako „najtmavší text"
+     (AI okná, panel notifikácií) — bez tohto padal na záložnú takmer čiernu. */
+  --previo-grey700: var(--dm-text);
 
   /* previo-grey: hlavička, horný pruh, polia */
   --p3-header-bg: var(--dm-surface);
