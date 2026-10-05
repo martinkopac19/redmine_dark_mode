@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.6 - 2026-10-05
+
+- **V nastavení Notification filter neboli v tme vidieť názvy východzích stavov** (nadpisy
+  skupín prechodov „New", „In Progress"…). Plugin má farby natvrdo v `<style>` svojej
+  stránky — nadpis takmer čierny. Teraz svetlý text, popisy a šípky stlmené, linka vľavo
+  v farbe okrajov tmavého režimu.
+
 ## 0.1.5 - 2026-10-02
 
 - **V okne AI issue creatora bol zadaný text v tme nečitateľný** (a popisok „What needs

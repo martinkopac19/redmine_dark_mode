@@ -487,6 +487,14 @@ html[data-dark="1"] .rep-btn { color: var(--dm-text); }
 html[data-dark="1"] .rep-ac-row:hover,
 html[data-dark="1"] .rep-ac-row.rep-ac-sel { background: var(--dm-surface-2); }
 
+/* Notification filter — farby má natvrdo v <style> svojej stránky; názov východzieho
+ * stavu (`.nf-from`) bol takmer čierny, teda na tmavom pozadí neviditeľný. */
+html[data-dark="1"] .nf-group .nf-from { color: var(--dm-text); }
+html[data-dark="1"] .nf-intro,
+html[data-dark="1"] .nf-hint { color: var(--dm-text-muted); }
+html[data-dark="1"] .nf-arrow { color: var(--dm-text-dim); }
+html[data-dark="1"] .nf-transitions { border-left-color: var(--dm-border); }
+
 /* ------------------------------------------------------------------ *
  * Drobnosti
  * ------------------------------------------------------------------ */
