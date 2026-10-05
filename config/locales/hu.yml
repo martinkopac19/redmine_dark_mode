@@ -1,0 +1,9 @@
+hu:
+  dark_mode:
+    toggle_label: "Sötét mód"
+    switch_to_dark: "Váltás sötét módra"
+    switch_to_light: "Váltás világos módra"
+    legend_general: "Sötét mód"
+    note: "Kapcsoló a fejlécben (hold ikon). A választás a fiókhoz mentődik, így minden olyan számítógépen érvényes, ahol a felhasználó bejelentkezik."
+    setting_enabled: "Sötét mód engedélyezése"
+    setting_enabled_info: "Kikapcsolva a kapcsoló eltűnik a fejlécből. Az egyéni választások mentve maradnak."

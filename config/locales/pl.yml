@@ -1,0 +1,9 @@
+pl:
+  dark_mode:
+    toggle_label: "Tryb ciemny"
+    switch_to_dark: "Przełącz na tryb ciemny"
+    switch_to_light: "Przełącz na tryb jasny"
+    legend_general: "Tryb ciemny"
+    note: "Przełącznik w nagłówku (ikona księżyca). Wybór jest zapisywany na koncie, więc obowiązuje na każdym komputerze, na którym dana osoba się zaloguje."
+    setting_enabled: "Włącz tryb ciemny"
+    setting_enabled_info: "Wyłączenie usuwa przełącznik z nagłówka. Indywidualne wybory pozostają zapisane."

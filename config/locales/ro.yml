@@ -1,0 +1,9 @@
+ro:
+  dark_mode:
+    toggle_label: "Mod întunecat"
+    switch_to_dark: "Comută la modul întunecat"
+    switch_to_light: "Comută la modul luminos"
+    legend_general: "Mod întunecat"
+    note: "Un comutator în antet (pictograma lună). Alegerea este salvată în cont, așa că urmează persoana pe orice calculator de pe care se autentifică."
+    setting_enabled: "Activează modul întunecat"
+    setting_enabled_info: "Dezactivarea elimină comutatorul din antet. Alegerile individuale rămân salvate."
