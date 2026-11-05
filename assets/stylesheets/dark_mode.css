@@ -969,3 +969,14 @@ html[data-dark="1"] #content table.list tbody tr.priority-high3:not(.context-men
 html[data-dark="1"] #content table.list tbody tr.priority-high4:not(.context-menu-selection) td { background-color: #3a2b1f; }
 html[data-dark="1"] #content table.list tbody tr.priority-high2:not(.context-menu-selection) td { background-color: #4a2b20; }
 html[data-dark="1"] #content table.list tbody tr.priority-highest:not(.context-menu-selection) td { background-color: #4d2328; }
+
+/* Ukazovateľ „% hotovo" v zozname úloh: pravidlá vyššie farbia každý `tr` a `td`
+ * v `table.list` (aj podľa priority), teda aj bunky malej tabuľky `table.progress` vnútri
+ * — pásik dostal farbu riadku a zmizol. Tu ho vraciame; selektor je dlhší, aby vyhral
+ * aj nad riadkami s prioritou. Farby ako vo svetlej téme: uzavreté plno zelené, hotové
+ * priesvitne zelené, zvyšok tmavá dráha s okrajom (pri hoveri má riadok farbu dráhy). */
+html[data-dark="1"] #content table.list tbody tr td table.progress { border: 1px solid var(--dm-border); }
+html[data-dark="1"] #content table.list tbody tr td table.progress tr { background-color: transparent; }
+html[data-dark="1"] #content table.list tbody tr td table.progress td.todo { background-color: var(--dm-surface-3); }
+html[data-dark="1"] #content table.list tbody tr td table.progress td.closed { background-color: var(--dm-positive); }
+html[data-dark="1"] #content table.list tbody tr td table.progress td.done { background-color: rgba(94, 186, 103, .5); }

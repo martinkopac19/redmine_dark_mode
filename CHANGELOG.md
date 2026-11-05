@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.7 - 2026-11-05
+
+- **V zozname úloh nebolo v tme vidieť „% hotovo“.** Pravidlá, ktoré farbia riadky zoznamu,
+  zafarbili aj bunky malej tabuľky ukazovateľa, takže pásik splynul s riadkom. Teraz je
+  pásik zelený (uzavreté plno, hotové priesvitne) na tmavej dráhe s okrajom, aj v riadkoch
+  s prioritou a pri hoveri.
+
 ## 0.1.6 - 2026-10-05
 
 - **V nastavení Notification filter neboli v tme vidieť názvy východzích stavov** (nadpisy
