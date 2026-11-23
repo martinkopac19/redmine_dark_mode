@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.8 - 2026-11-23
+
+- **Kontextové menu nad úlohami (pravý klik) bolo v tme nečitateľné:** svetlý text na bielom
+  pozadí. Tmavé pozadie mieril selektor na triedu, ktorú menu v Redmine 6.1 nemá. Teraz má
+  menu aj podmenu tmavé pozadie, tmavý hover položky a nedostupné položky ostávajú tlmené.
+
 ## 0.1.7 - 2026-11-05
 
 - **V zozname úloh nebolo v tme vidieť „% hotovo“.** Pravidlá, ktoré farbia riadky zoznamu,

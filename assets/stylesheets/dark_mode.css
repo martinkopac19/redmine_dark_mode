@@ -269,7 +269,7 @@ html[data-dark="1"] .tabs ul li a.selected {
   border-bottom-color: var(--dm-surface);
 }
 
-html[data-dark="1"] #context-menu .menu-root,
+html[data-dark="1"] #context-menu ul,
 html[data-dark="1"] .drdn-content,
 html[data-dark="1"] ul.menu-children {
   background: var(--dm-surface-3);
@@ -282,6 +282,14 @@ html[data-dark="1"] .drdn-content a { color: var(--dm-text); }
 
 html[data-dark="1"] #context-menu a:hover,
 html[data-dark="1"] .drdn-content a:hover { background: var(--dm-link); color: #10141a; }
+
+/* Kontextové menu nad úlohami (pravý klik). Jadro mu dáva biele pozadie na `ul`
+ * a bielu/svetlomodrú rámik a hover na `li` — bez tohto bol svetlý text na bielom.
+ * Nedostupné položky (`a.disabled`) ostávajú tlmené aj pri hoveri. */
+html[data-dark="1"] #context-menu li { border-color: transparent; }
+html[data-dark="1"] #context-menu li:hover { background-color: var(--dm-surface-2); border-color: var(--dm-border); }
+html[data-dark="1"] #context-menu a.disabled,
+html[data-dark="1"] #context-menu a.disabled:hover { background: none; color: var(--dm-text-dim); }
 
 /* ------------------------------------------------------------------ *
  * Detail úlohy, komentáre, wiki
